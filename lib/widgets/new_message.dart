@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class NewMessage extends StatefulWidget {
@@ -12,7 +15,7 @@ class _NewMessageState extends State<NewMessage> {
   final TextEditingController _newMsgController = TextEditingController();
 
   // Class Methods.
-  void _submitMessage() {
+  void _submitMessage() async{
     final newMsgText = _newMsgController.text;
 
     if (newMsgText.trim().isEmpty) {
@@ -25,11 +28,28 @@ class _NewMessageState extends State<NewMessage> {
       return;
     }
 
-    // Else send to firebase if Msg is not empty.
-
+    // Close the Keyboard.
+    // By removing the focus from the Text field.
+    FocusScope.of(context).unfocus();
     _newMsgController.clear();
 
+    // Else send to firebase if Msg is not empty.
 
+    // 1. Get the user details already in firestore.
+    final user = FirebaseAuth.instance.currentUser!;
+    final userData = await FirebaseFirestore.instance
+    .collection('users')
+    .doc(user.uid)
+    .get();
+
+    // 2. Push the user message alongwith his details.
+    FirebaseFirestore.instance.collection('chat').add({
+      'text': newMsgText,
+      'createdAt': Timestamp.now(),
+      'userId': userData.data()!['uid'],
+      'username': userData.data()!['username'],
+      'userImage': userData.data()!['image_url'],
+    });
   }
 
   @override

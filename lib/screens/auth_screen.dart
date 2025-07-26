@@ -58,13 +58,16 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _enteredEmail,
           password: _enteredPassword,
         );
-      } else {
+        
+      } 
+      else {
         // When "Sign Up". (Else case)
         // Create the user account.
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
+        print('User Credential Map: $userCredentials');
 
         // Upload Image only during New Sign Ups.
         if (_selectedImage != null) {
@@ -79,11 +82,10 @@ class _AuthScreenState extends State<AuthScreen> {
 
             final imageUrl = response.secureUrl;
             print('Uploaded image URL: $imageUrl');
-            
+
             // ******* FireStore Database Saving ***********
             // Save the Email, Password, Username, Image URL to Firestore Database.
-            await FirebaseFirestore.instance.collection('users').
-            doc(userCredentials.user!.uid).set({
+            await FirebaseFirestore.instance.collection('users').doc(userCredentials.user!.uid).set({
               'username': _enteredUserName,
               'email': _enteredEmail,
               'image_url': imageUrl,
@@ -130,8 +132,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           // Conditional Image Picker Widget.
                           // Will be displayed (_isLogin = false)
                           // That is when it is Sign Up.
-                          if (!_isLogin) 
-                            UserImagePicker(onImagePick: _onSelectImage),
+                          if (!_isLogin) UserImagePicker(onImagePick: _onSelectImage),
 
                           // User Name Field. (Only During Sign-Up)
                           if (!_isLogin)

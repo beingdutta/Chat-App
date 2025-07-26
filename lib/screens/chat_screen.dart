@@ -25,8 +25,8 @@ class ChatScreen extends StatelessWidget{
       ),
       body: Column(
         children: [
-          // Exisiting Chat Messages
-          ChatMessages(),
+          // Existing Chat Messages
+          Expanded(child: ChatMessages()),
 
           // New Message Field and Send Btn,
           NewMessage()
