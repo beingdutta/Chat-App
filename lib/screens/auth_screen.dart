@@ -43,6 +43,9 @@ class _AuthScreenState extends State<AuthScreen> {
     final isValid = _formKey.currentState!.validate();
 
     if (!isValid || !_isLogin && _selectedImage == null) {
+      setState(() {
+        _isUploadingNAuthenticating = false;
+      });
       return;
     }
     // If not retuned save the form details.
@@ -58,7 +61,6 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _enteredEmail,
           password: _enteredPassword,
         );
-        
       } 
       else {
         // When "Sign Up". (Else case)
@@ -100,6 +102,10 @@ class _AuthScreenState extends State<AuthScreen> {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.message ?? 'Authentication failed.')));
     }
+
+    setState(() {
+      _isUploadingNAuthenticating = false;
+    });
   }
 
   @override
