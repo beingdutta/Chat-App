@@ -1,16 +1,15 @@
 # chat_app
 
-A new Flutter project.
+An email and password-based Android general chat app built on Dart & Flutter, complete with a Firebase backend.
+- User can log in & sign up.
+- Can choose their profile picture.
+- Can send a message to the general chat and receive a notification for the same.
 
-## Getting Started
+<img width="260" height="470" alt="Screenshot_1753611550" src="https://github.com/user-attachments/assets/0f9555d0-6825-4e73-92bd-251fd68c037e" />
 
-This project is a starting point for a Flutter application.
+<img width="260" height="470" alt="Screenshot_1753611588" src="https://github.com/user-attachments/assets/d1b33291-77a6-4d80-83cb-3d86790e7649" />
 
-A few resources to get you started if this is your first Flutter project:
+<img width="260" height="470" alt="Screenshot_1753611620" src="https://github.com/user-attachments/assets/4b445404-06b8-4e01-9c66-7041e2e56bb9" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
