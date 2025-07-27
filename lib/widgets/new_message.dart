@@ -42,11 +42,13 @@ class _NewMessageState extends State<NewMessage> {
     .doc(user.uid)
     .get();
 
+    //print('User data retrieved from Firestore: ${userData.data()}');
+
     // 2. Push the user message alongwith his details.
     FirebaseFirestore.instance.collection('chat').add({
       'text': newMsgText,
       'createdAt': Timestamp.now(),
-      'userId': userData.data()!['uid'],
+      'userId': user.uid,
       'username': userData.data()!['username'],
       'userImage': userData.data()!['image_url'],
     });
